@@ -1,0 +1,88 @@
+﻿<Window x:Class="StudentData.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentData"
+        mc:Ignorable="d"
+        Title="StudentData" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="headerGrid" Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Menu x:Name="mainMenu" Grid.Row="0" Grid.Column="0">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
+                        <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
+                        <Separator/>
+                        <MenuItem Header="_Close" Command="ApplicationCommands.Close"/>
+                    </MenuItem>
+                    <MenuItem Header="_About" Command="ApplicationCommands.Help"/>
+                </Menu>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Excel File：" Target="{Binding ElementName=txtSourceFile}" Grid.Row="0" Grid.Column="0" Margin="10 10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtSourceFile" Grid.Row="0" Grid.Column="1" Margin="20 0" Height="{Binding ElementName=columnName, Path=ActualHeight}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <Button x:Name="btnBrowse" Grid.Row="0" Grid.Column="2" Content="Browse" Padding="15 2" Click="btnBrowse_Click" Margin="20 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="showReport" Content="Report" Click="showReport_Click" Grid.Row="0" Grid.Column="3" Padding="15 2" Margin="20 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Column Name:" Grid.Row="0" Grid.Column="0" Margin="10 5 10 10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox Name="columnName" Grid.Row="0" Grid.Column="1" Margin="10 0" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <Label Content="Value:" Grid.Row="0" Grid.Column="2" Margin="20 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox Name="columnValue" Grid.Row="0" Grid.Column="3" Margin="10 0" Height="{Binding ElementName=columnName, Path=ActualHeight}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+                <Button Content="Search" Grid.Row="0" Grid.Column="4" Margin="20 0" Click="SearchButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15 2"/>
+                <Button Content="Normal" Grid.Row="0" Grid.Column="5" Margin="20 0" Click="NormalButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15 2"/>
+            </Grid>
+        </Grid>
+
+        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="2" IsEnabled="False"/>
+
+        <Grid x:Name="CenterGrid" Grid.Row="2" Grid.Column="0">
+            <DataGrid x:Name="DataSourceGrid">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+        </Grid>
+
+        <Grid x:Name="footerGrid" Grid.Row="3">
+            <StatusBar Name="statusBar">
+                <StatusBarItem Content="Ready"/>
+            </StatusBar>
+        </Grid>
+    </Grid>
+</Window>
